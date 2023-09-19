@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.winter.app.board.BoardVO;
 import com.winter.app.commons.Pager;
@@ -44,6 +45,24 @@ public class NoticeController {
 		
 		return "redirect:./list";
 	}
+	
+	//detail
+//	@GetMapping("detail")
+//	public ModelAndView getDetail(Pager pager,ModelAndView mv, BoardVO boardVO)throws Exception{
+//		boardVO = noticeService.getDetail(boardVO);
+//		mv.addObject("de", boardVO);
+//		return mv;
+//	}
+
+	@GetMapping("detail")
+	public String getDetail(Pager pager, Model model, BoardVO boardVO) throws Exception {
+	    boardVO = noticeService.getDetail(boardVO);
+	    model.addAttribute("dto", boardVO);
+	    return "board/detail";
+	}
+
+	
+	
 	
 	
 }
