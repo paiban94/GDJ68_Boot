@@ -48,18 +48,47 @@
    	
    	
    	
-   	<insert id="add" parameterType="BoardVO">
-   		INSERT INTO NOTICE
-   		VALUES (NULL, #{boardTitle},#{boardWriter}, #{boardContents}, now(),0)
+   	<insert id="add" parameterType="BoardVO" useGeneratedKeys="true" keyProperty="boardNo">
+  		INSERT INTO NOTICE  
+  		VALUES (null, #{boardTitle}, #{boardWriter}, #{boardContents}, now(), 0)
+  	</insert>
    	
-   	</insert>
+  	<insert id="fileAdd" parameterType="NoticeFileVO">
+  		INSERT INTO NOTICEFILES
+  		VALUES (#{fileNo}, #{boardNo}, #{fileName}, #{oriName})
+  	</insert>
    	
    	
    	
-   		<!-- Detail -->
-  	<select id="getDetail" parameterType="BoardVO" resultType="NoticeVO">
-  		SELECT * FROM NOTICE WHERE BOARDNO=#{boardNo}
+  	<!-- Detail -->
+	<select id="getDetail" parameterType="BoardVO" resultMap="getDetailResult">
+  		SELECT N.*, NF.* 
+  		FROM
+  				NOTICE N
+  				LEFT OUTER JOIN
+  				NOTICEFILES NF
+  				ON N.BOARDNO=NF.BOARDNO
+			<!-- NOTICE와 NOTICEFILES의 BOARDNO 컬럼명이같으면 USING 사용가능, *은 빼야함  -->  		
+		WHERE N.BOARDNO=#{boardNo}
   	</select>
+  	
+  	<!-- 1대다 맵핑 -->
+  	<resultMap type="NoticeVO" id="getDetailResult">
+  		<id column="BOARDNO" property="boardNo"/>
+  		<result column="BOARDTITLE" property="boardTitle"/>
+  		<result column="BOARDWRITER" property="boardWriter"/>
+  		<result column="BOARDCONTENTS" property="boardContents"/>
+  		<result column="BOARDDATE" property="boardDate"/>
+  		<result column="BOARDHIT" property="boardHit"/>
+  		<collection property="list" javaType="java.util.List" ofType="NoticeFileVO">
+  			<id column="FILENO" property="fileNo"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORINAME" property="oriName"/>
+  		</collection>
+  	</resultMap>
+  	
+  	
+  	
   	
   	<!-- Update -->
   	<update id="setUpdate" parameterType="BoardVO">
@@ -70,7 +99,7 @@
   	</update>
   	
   	
-  	<!-- 조회수 update -->
+	<!-- 조회수 update -->
   	<update id="setHitUpdate" parameterType="BoardVO">
   		UPDATE NOTICE SET BOARDHIT=BOARDHIT+1 WHERE BOARDNO=#{boardNo}
   	</update>
@@ -80,6 +109,10 @@
   		DELETE FROM NOTICE WHERE BOARDNO=#{boardNo}
   	</delete>
    	
-   	
+   	<select id="getFileDetail" parameterType="FileVO" resultType="NoticeFileVO">
+   		SELECT * FORM NOTICEFILES WHERE FILENO=#{fileNo}
+   		
+   	</select>
+   	   
    	   
    </mapper>

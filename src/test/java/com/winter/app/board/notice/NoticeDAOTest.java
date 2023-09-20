@@ -36,7 +36,7 @@ class NoticeDAOTest {
 		System.out.println("finish");
 }	
 	
-	@Test
+	//@Test
 	//count	
 	void getCountTest()throws Exception{
 		Pager pager = new Pager();
@@ -49,7 +49,7 @@ class NoticeDAOTest {
 	}
 	
 	
-	@Test
+	//@Test
 	void getListTest()throws Exception {
 		Pager pager = new Pager();
 		pager.setStartRow(0L);

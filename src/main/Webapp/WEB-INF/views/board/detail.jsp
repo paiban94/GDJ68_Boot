@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <!--  c태그 가져오기 -->
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,47 +10,45 @@
 
 </head>
 <body id="page-top">
- 	 <!-- Page Wrapper -->
+    <!-- Page Wrapper -->
     <div id="wrapper">
     	<!-- sidebar -->
-    	<!-- c:import는 jsp불러오기 가능 -->
     	<c:import url="/WEB-INF/views/layout/sidebar.jsp"></c:import>
-    		
-    		  <div id="content-wrapper" class="d-flex flex-column">
-    		  
-    		  	 <!-- Main Content -->
-            	<div id="content">
-            	<c:import url="/WEB-INF/views/layout/topbar.jsp"></c:import>
-            	
-            		<div class="container-fluid">
-            	
-						<h1 class="mb-3">상세 페이지</h1>
-						
-						<h1>${de.boardNo}</h1>
-					
-						<h1>${de.boardTitle}</h1>
-						<h1>${de.boardContents}</h1>
-						<h1>${de.boardDate}</h1>
-						<h1>${de.boardHit}</h1>
-						
-				
-					
-						<a href="./update?noticeNo=${dto.noticeNo}">수정</a>
-						<a href="./delete?noticeNo=${dto.noticeNo}">삭제</a>
-            			
-            		</div>
-            	
-            	</div>
-
-    		  
-    		  <c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
-    		  
-    		  	</div>
-    		  
-    		  
-    		  </div>
-   
+    	
+    	 <div id="content-wrapper" class="d-flex flex-column">
+    	 	<div id="content">
+    	 		
+    	 		<c:import url="/WEB-INF/views/layout/topbar.jsp"></c:import>
+    	 		
+    	 		<div class="container-fluid">
+    	 			<!-- page 실제 내용 -->
+    	 			<div class="row">
+    	 				<div>${boardVO.boardTitle}</div>
+    	 				<div>${boardVO.boardWriter}</div>
+    	 				<div>${boardVO.boardContents}</div>
+    	 			</div>
+    	 			
+    	 			<div class="row">
+    	 				<c:forEach items="${boardVO.list}" var="f">
+    	 					<img alt="" src="../files/${board}/${f.fileName}">
+    	 					<a href="./fileDown?fileNo=${f.fileNo}">${f.oriName}</a>
+    	 				
+    	 				</c:forEach>
+    	 			</div>
+    	 			
+    	 			
+    	 		</div>
+    	 	
+    	 	</div>
+    	 	
+    	 	<c:import url="/WEB-INF/views/layout/footer.jsp"></c:import>
+    	 
+    	 </div>
+    	
+    </div>
     
- <c:import url="./layout/footjs.jsp"></c:import>   
+    
+
+<c:import url="/WEB-INF/views/layout/footjs.jsp"></c:import>
 </body>
 </html>

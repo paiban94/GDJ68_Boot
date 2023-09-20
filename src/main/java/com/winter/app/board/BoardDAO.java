@@ -9,12 +9,13 @@ public interface BoardDAO {
 	//boardvo가 여러개 오니까 list
 	//메서드명인 mapper랑 동일하게.
 	
-	
 	public Long getCount(Pager pager)throws Exception;
 	
 	public List<BoardVO> getList(Pager pager)throws Exception;
 	
 	public int add(BoardVO boardVO)throws Exception;
+	
+	public int fileAdd(FileVO fileVO)throws Exception;
 	
 	public BoardVO getDetail(BoardVO boardVO)throws Exception;
 	
@@ -23,4 +24,7 @@ public interface BoardDAO {
 	public int setHitUpdate (BoardVO boardVO)throws Exception;
 	
 	public int setDelete(BoardVO boardVO)throws Exception;
+	
+	public FileVO getFileDetail(FileVO fileVO)throws Exception;
+
 }
