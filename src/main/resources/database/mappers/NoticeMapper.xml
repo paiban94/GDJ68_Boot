@@ -55,7 +55,7 @@
    	
   	<insert id="fileAdd" parameterType="NoticeFileVO">
   		INSERT INTO NOTICEFILES
-  		VALUES (#{fileNo}, #{boardNo}, #{fileName}, #{oriName})
+  		VALUES (#{fileNo}, #{boardNo}, #{fileName}, #{oriName})d
   	</insert>
    	
    	

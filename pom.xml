@@ -56,6 +56,13 @@
 			
 		</dependency>
 		
+		<!--AOP(관점지향언어, Aspect Oriented Programming)-->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+				<!-- 버전 생략 -->
+		</dependency>
+		
 		
 		
 		
