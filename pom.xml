@@ -12,6 +12,8 @@
 	<artifactId>GDJ68_Boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>GDJ68_Boot</name>
+	<!-- packing : 최종 파일을 어떤것으로 만들건지-->
+	<packaging>war</packaging>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
