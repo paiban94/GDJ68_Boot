@@ -16,7 +16,7 @@ class NoticeDAOTest {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-	//@Test
+	@Test
 	void addTest()throws Exception{
 		for(int i=0; i<150; i++) {
 		//for문으로 150개까지 만들기
